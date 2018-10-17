@@ -2,19 +2,25 @@
 using SportsStore.Models;
 using System.Linq;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 
 namespace SportsStore.Controllers {
 
     [Authorize]
     public class AdminController : Controller {
         private IProductRepository repository;
-
-        public AdminController(IProductRepository repo) {
+        private UserManager<IdentityUser> userManager;
+        public AdminController(IProductRepository repo, UserManager<IdentityUser> usrMgr) {
             repository = repo;
+            userManager = usrMgr;
         }
 
-        public ViewResult Index() => View(repository.Products);
 
+        public ViewResult Index(){
+      
+        return     View(repository.Products);
+
+    }
         public ViewResult Edit(int productId) =>
             View(repository.Products
                 .FirstOrDefault(p => p.ProductID == productId));
