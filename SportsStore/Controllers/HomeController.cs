@@ -9,12 +9,12 @@ namespace SportsStore.Controllers {
 
     public class HomeController : Controller {
         private IProductRepository repository;
-        private Cart cart;
+    
         private UserManager<ApplicationUser> userManager;
 
-        public HomeController(IProductRepository repo, Cart cartService, UserManager<ApplicationUser> usrMgr) {
+        public HomeController(IProductRepository repo,  UserManager<ApplicationUser> usrMgr) {
             repository = repo;
-            cart = cartService;
+       
             userManager = usrMgr;
         }
 
@@ -51,24 +51,6 @@ namespace SportsStore.Controllers {
             });
         }
 
-        public RedirectToActionResult AddToCart(int productId, string returnUrl) {
-            Product product = repository.Products
-                .FirstOrDefault(p => p.ProductID == productId);
-            if (product != null) {
-                cart.AddItem(product, 1);
-            }
-            return RedirectToAction("Index", new { returnUrl });
-        }
-
-        public RedirectToActionResult RemoveFromCart(int productId,
-                string returnUrl) {
-            Product product = repository.Products
-                .FirstOrDefault(p => p.ProductID == productId);
-
-            if (product != null) {
-                cart.RemoveLine(product);
-            }
-            return RedirectToAction("Index", new { returnUrl });
-        }
+        
     }
 }

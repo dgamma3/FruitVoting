@@ -9,32 +9,35 @@
     <Compile Remove="Views\Cart\**" />
     <Compile Remove="Views\Order\**" />
     <Compile Remove="Views\Product\**" />
-    <Compile Remove="Views\Shared\**" />
+    <Compile Remove="Views\Shared\Components\**" />
     <Content Remove="Views\Cart\**" />
     <Content Remove="Views\Order\**" />
     <Content Remove="Views\Product\**" />
-    <Content Remove="Views\Shared\**" />
+    <Content Remove="Views\Shared\Components\**" />
     <EmbeddedResource Remove="Views\Cart\**" />
     <EmbeddedResource Remove="Views\Order\**" />
     <EmbeddedResource Remove="Views\Product\**" />
-    <EmbeddedResource Remove="Views\Shared\**" />
+    <EmbeddedResource Remove="Views\Shared\Components\**" />
     <None Remove="Views\Cart\**" />
     <None Remove="Views\Order\**" />
     <None Remove="Views\Product\**" />
-    <None Remove="Views\Shared\**" />
+    <None Remove="Views\Shared\Components\**" />
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Remove="Components\CartSummaryViewComponent.cs" />
     <Compile Remove="Controllers\ErrorController.cs" />
     <Compile Remove="Controllers\OrderController.cs" />
     <Compile Remove="Controllers\ProductController.cs" />
     <Compile Remove="Infrastructure\PageLinkTagHelper.cs" />
     <Compile Remove="Infrastructure\ProductsListViewModel.cs" />
+    <Compile Remove="Models\Cart.cs" />
     <Compile Remove="Models\EFOrderRepository.cs" />
     <Compile Remove="Models\FakeProductRepository.cs" />
     <Compile Remove="Models\Fruit.cs" />
     <Compile Remove="Models\IOrderRepository.cs" />
     <Compile Remove="Models\Order.cs" />
+    <Compile Remove="Models\SessionCart.cs" />
     <Compile Remove="Models\ViewModels\CartIndexViewModel.cs" />
     <Compile Remove="Models\ViewModels\PagingInfo.cs" />
   </ItemGroup>
@@ -48,6 +51,12 @@
     <PackageReference Include="Microsoft.AspNetCore.All" Version="2.0.0" />
     <DotNetCliToolReference Include="Microsoft.EntityFrameworkCore.Tools.DotNet" Version="2.0.0" />
 
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="Views\Shared\ProductSummary.cshtml" />
+    <None Include="Views\Shared\_AdminLayout.cshtml" />
+    <None Include="Views\Shared\_Layout.cshtml" />
   </ItemGroup>
 
   <ItemGroup>
