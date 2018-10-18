@@ -3,22 +3,50 @@ using SportsStore.Models;
 using System.Linq;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
+using SportsStore.Models.ViewModels;
+using Microsoft.AspNetCore.Http;
+using System.Threading.Tasks;
 
 namespace SportsStore.Controllers {
 
     [Authorize]
     public class AdminController : Controller {
         private IProductRepository repository;
-        private UserManager<IdentityUser> userManager;
-        public AdminController(IProductRepository repo, UserManager<IdentityUser> usrMgr) {
+        private UserManager<ApplicationUser> userManager;
+        private readonly IHttpContextAccessor _httpContextAccessor;
+        string u;
+
+        private async Task<ApplicationUser> GetCurrentUser()
+        {
+           return  await userManager.GetUserAsync(_httpContextAccessor.HttpContext.User);
+        
+            
+        }
+
+
+
+        public AdminController(IProductRepository repo, UserManager<ApplicationUser> usrMgr, IHttpContextAccessor httpContextAccessor) {
             repository = repo;
             userManager = usrMgr;
+            _httpContextAccessor = httpContextAccessor;
+
+           
+      
+           
+           
+
+
         }
 
 
         public ViewResult Index(){
-      
-        return     View(repository.Products);
+
+            return View(new AdminViewModel()
+            {
+                user = GetCurrentUser().Result,
+                products = repository.Products
+
+            });
 
     }
         public ViewResult Edit(int productId) =>
