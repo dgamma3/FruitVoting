@@ -143,6 +143,8 @@ namespace SportsStore.Migrations
 
                     b.Property<bool>("EmailConfirmed");
 
+                    b.Property<int?>("FruitID");
+
                     b.Property<bool>("LockoutEnabled");
 
                     b.Property<DateTimeOffset?>("LockoutEnd");
@@ -159,8 +161,6 @@ namespace SportsStore.Migrations
 
                     b.Property<bool>("PhoneNumberConfirmed");
 
-                    b.Property<int?>("ProductFruitID");
-
                     b.Property<string>("SecurityStamp");
 
                     b.Property<bool>("TwoFactorEnabled");
@@ -172,6 +172,8 @@ namespace SportsStore.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("FruitID");
+
                     b.HasIndex("NormalizedEmail")
                         .HasName("EmailIndex");
 
@@ -179,8 +181,6 @@ namespace SportsStore.Migrations
                         .IsUnique()
                         .HasName("UserNameIndex")
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
-
-                    b.HasIndex("ProductFruitID");
 
                     b.ToTable("AspNetUsers");
                 });
@@ -244,9 +244,9 @@ namespace SportsStore.Migrations
 
             modelBuilder.Entity("SportsStore.Models.ApplicationUser", b =>
                 {
-                    b.HasOne("SportsStore.Models.Fruit", "Product")
+                    b.HasOne("SportsStore.Models.Fruit", "Fruit")
                         .WithMany()
-                        .HasForeignKey("ProductFruitID");
+                        .HasForeignKey("FruitID");
                 });
 #pragma warning restore 612, 618
         }

@@ -8,95 +8,59 @@ using Microsoft.AspNetCore.Http;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 
-namespace SportsStore.Controllers {
+namespace SportsStore.Controllers
+{
 
     [Authorize]
-    public class AdminController : Controller {
+    public class AdminController : Controller
+    {
         private IProductRepository repository;
         private UserManager<ApplicationUser> userManager;
-        private readonly IHttpContextAccessor _httpContextAccessor;
-        string u;
-        private AppIdentityDbContext context1;
+        private readonly IHttpContextAccessor httpContext;
+        private AppIdentityDbContext context;
+
+
         private async Task<ApplicationUser> GetCurrentUser()
         {
-           return  await userManager.GetUserAsync(_httpContextAccessor.HttpContext.User);
-        
-            
+            return await userManager.GetUserAsync(httpContext.HttpContext.User);
         }
 
-
-
-        public AdminController(IProductRepository repo, UserManager<ApplicationUser> usrMgr, IHttpContextAccessor httpContextAccessor, AppIdentityDbContext context ) {
+        public AdminController(IProductRepository repo, UserManager<ApplicationUser> usrMgr, IHttpContextAccessor httpContextAccessor, AppIdentityDbContext ctx)
+        {
             repository = repo;
             userManager = usrMgr;
-            _httpContextAccessor = httpContextAccessor;
-            context1 = context;
-
-
-
-
-
-
-
+            httpContext = httpContextAccessor;
+            context = ctx;
         }
 
 
-        public ViewResult Index(){
+        public ViewResult Index()
+        {
+             context.Users.Include(p => p.Fruit).ToArray();
 
-           var qp = context1.Users.Include(p => p.Product).ToArray();
-            var gg = GetCurrentUser().Result;
             return View(new AdminViewModel()
             {
-                user = GetCurrentUser().Result,
-                products = repository.Products
-
+                User = GetCurrentUser().Result,
+                Fruits = repository.Fruit
             });
-
-    }
+        }
 
         public IActionResult Add(int ProductID)
         {
-          var newProduct =  repository.Products.First(x => x.FruitID == ProductID);
+            var newProduct = repository.Fruit.First(x => x.FruitID == ProductID);
 
-           var user = GetCurrentUser().Result;
-            user.Product = newProduct;
+            var currentUser = GetCurrentUser().Result;
+            currentUser.Fruit = newProduct;
+            context.SaveChanges();
 
-
-            context1.SaveChanges();
-         
-              
             return RedirectToAction("Index");
 
         }
-        public ViewResult Edit(int productId) =>
-            View(repository.Products
-                .FirstOrDefault(p => p.FruitID == productId));
         
-        [HttpPost]
-        public IActionResult Edit(Fruit product) {
-            if (ModelState.IsValid) {
-                repository.SaveProduct(product);
-                TempData["message"] = $"{product.Name} has been saved";
-                return RedirectToAction("Index");
-            } else {
-                // there is something wrong with the data values
-                return View(product);
-            }
-        }
-
-        public ViewResult Create() => View("Edit", new Fruit());
 
         [HttpPost]
-        public IActionResult Delete(int productId) {
-            Fruit deletedProduct = repository.DeleteProduct(productId);
-            if (deletedProduct != null) {
-                TempData["message"] = $"{deletedProduct.Name} was deleted";
-            }
-            return RedirectToAction("Index");
-        }
-
-        [HttpPost]
-        public IActionResult SeedDatabase() {
+        public IActionResult SeedDatabase()
+        {
             SeedData.EnsurePopulated(HttpContext.RequestServices);
             return RedirectToAction(nameof(Index));
         }

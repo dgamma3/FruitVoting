@@ -4,7 +4,7 @@
     Layout = "_AdminLayout";
 }
 
-@if (Model.products.Count() == 0)
+@if (Model.Fruits.Count() == 0)
 {
 
     <div class="text-center m-2">
@@ -16,10 +16,10 @@
 }
 
 
-Hello @Model.user.UserName
-@if (@Model.user.Product != null)
+Hello @Model.User.UserName
+@if (@Model.User.Fruit != null)
 {
-    <p>You previously voted for @Model.user.Product.Name</p>
+    <p>You previously voted for @Model.User.Fruit.Name</p>
     <p>Change your selection below:</p>
 }
 else
@@ -33,7 +33,7 @@ else
 
 
     <select name="ProductID">
-        @foreach (var item in Model.products)
+        @foreach (var item in Model.Fruits)
         {
             <option value="@item.FruitID">@item.Name</option>
 

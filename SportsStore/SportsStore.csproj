@@ -52,13 +52,14 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Include="Views\Shared\ProductSummary.cshtml" />
     <None Include="Views\Shared\_AdminLayout.cshtml" />
-    <None Include="Views\Shared\_Layout.cshtml" />
   </ItemGroup>
 
   <ItemGroup>
     <Content Update="Views\Home\Index.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+    <Content Update="Views\Shared\_StandardLayout.cshtml">
       <Pack>$(IncludeRazorContentInPack)</Pack>
     </Content>
   </ItemGroup>

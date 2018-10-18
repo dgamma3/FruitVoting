@@ -11,7 +11,7 @@ using System;
 namespace SportsStore.Migrations
 {
     [DbContext(typeof(AppIdentityDbContext))]
-    [Migration("20181018045650_init")]
+    [Migration("20181018131650_init")]
     partial class init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -144,6 +144,8 @@ namespace SportsStore.Migrations
 
                     b.Property<bool>("EmailConfirmed");
 
+                    b.Property<int?>("FruitID");
+
                     b.Property<bool>("LockoutEnabled");
 
                     b.Property<DateTimeOffset?>("LockoutEnd");
@@ -160,8 +162,6 @@ namespace SportsStore.Migrations
 
                     b.Property<bool>("PhoneNumberConfirmed");
 
-                    b.Property<int?>("ProductID");
-
                     b.Property<string>("SecurityStamp");
 
                     b.Property<bool>("TwoFactorEnabled");
@@ -173,6 +173,8 @@ namespace SportsStore.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("FruitID");
+
                     b.HasIndex("NormalizedEmail")
                         .HasName("EmailIndex");
 
@@ -181,83 +183,17 @@ namespace SportsStore.Migrations
                         .HasName("UserNameIndex")
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
 
-                    b.HasIndex("ProductID");
-
                     b.ToTable("AspNetUsers");
                 });
 
-            modelBuilder.Entity("SportsStore.Models.CartLine", b =>
+            modelBuilder.Entity("SportsStore.Models.Fruit", b =>
                 {
-                    b.Property<int>("CartLineID")
+                    b.Property<int>("FruitID")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<int?>("OrderID");
+                    b.Property<string>("Name");
 
-                    b.Property<int?>("ProductID");
-
-                    b.Property<int>("Quantity");
-
-                    b.HasKey("CartLineID");
-
-                    b.HasIndex("OrderID");
-
-                    b.HasIndex("ProductID");
-
-                    b.ToTable("CartLine");
-                });
-
-            modelBuilder.Entity("SportsStore.Models.Order", b =>
-                {
-                    b.Property<int>("OrderID")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<string>("City")
-                        .IsRequired();
-
-                    b.Property<string>("Country")
-                        .IsRequired();
-
-                    b.Property<bool>("GiftWrap");
-
-                    b.Property<string>("Line1")
-                        .IsRequired();
-
-                    b.Property<string>("Line2");
-
-                    b.Property<string>("Line3");
-
-                    b.Property<string>("Name")
-                        .IsRequired();
-
-                    b.Property<bool>("Shipped");
-
-                    b.Property<string>("State")
-                        .IsRequired();
-
-                    b.Property<string>("Zip");
-
-                    b.HasKey("OrderID");
-
-                    b.ToTable("Orders");
-                });
-
-            modelBuilder.Entity("SportsStore.Models.Product", b =>
-                {
-                    b.Property<int>("ProductID")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<string>("Category")
-                        .IsRequired();
-
-                    b.Property<string>("Description")
-                        .IsRequired();
-
-                    b.Property<string>("Name")
-                        .IsRequired();
-
-                    b.Property<decimal>("Price");
-
-                    b.HasKey("ProductID");
+                    b.HasKey("FruitID");
 
                     b.ToTable("Products");
                 });
@@ -309,20 +245,9 @@ namespace SportsStore.Migrations
 
             modelBuilder.Entity("SportsStore.Models.ApplicationUser", b =>
                 {
-                    b.HasOne("SportsStore.Models.Product", "Product")
+                    b.HasOne("SportsStore.Models.Fruit", "Fruit")
                         .WithMany()
-                        .HasForeignKey("ProductID");
-                });
-
-            modelBuilder.Entity("SportsStore.Models.CartLine", b =>
-                {
-                    b.HasOne("SportsStore.Models.Order")
-                        .WithMany("Lines")
-                        .HasForeignKey("OrderID");
-
-                    b.HasOne("SportsStore.Models.Product", "Product")
-                        .WithMany()
-                        .HasForeignKey("ProductID");
+                        .HasForeignKey("FruitID");
                 });
 #pragma warning restore 612, 618
         }

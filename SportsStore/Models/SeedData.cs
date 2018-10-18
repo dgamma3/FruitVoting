@@ -14,32 +14,16 @@ namespace SportsStore.Models {
             if (!context.Products.Any()) {
                 context.Products.AddRange(
                     new Fruit {
-                        Name = "Kayak"
-                    
+                        Name = "Apple"
                     },
                     new Fruit {
-                        Name = "Lifejacket"
+                        Name = "Orange"
                     },
                     new Fruit {
-                        Name = "Soccer Ball"
+                        Name = "Banana"
                     },
                     new Fruit {
-                        Name = "Corner Flags"
-                    },
-                    new Fruit {
-                        Name = "Stadium"
-                    },
-                    new Fruit {
-                        Name = "Thinking Cap"
-                    },
-                    new Fruit {
-                        Name = "Unsteady Chair"
-                    },
-                    new Fruit {
-                        Name = "Human Chess Board"
-                    },
-                    new Fruit {
-                        Name = "Bling-Bling King"
+                        Name = "Pineapples"
                     }
                 );
                 context.SaveChanges();

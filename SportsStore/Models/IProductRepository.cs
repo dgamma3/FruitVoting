@@ -4,7 +4,7 @@ namespace SportsStore.Models {
 
     public interface IProductRepository {
 
-        IQueryable<Fruit> Products { get; }
+        IQueryable<Fruit> Fruit { get; }
 
         void SaveProduct(Fruit product);
 

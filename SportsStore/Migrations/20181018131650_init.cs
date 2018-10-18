@@ -24,41 +24,16 @@ namespace SportsStore.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Orders",
-                columns: table => new
-                {
-                    OrderID = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    City = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Country = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    GiftWrap = table.Column<bool>(type: "bit", nullable: false),
-                    Line1 = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Line2 = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Line3 = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Shipped = table.Column<bool>(type: "bit", nullable: false),
-                    State = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Zip = table.Column<string>(type: "nvarchar(max)", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Orders", x => x.OrderID);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "Products",
                 columns: table => new
                 {
-                    ProductID = table.Column<int>(type: "int", nullable: false)
+                    FruitID = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    Category = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Price = table.Column<decimal>(type: "decimal(18, 2)", nullable: false)
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Products", x => x.ProductID);
+                    table.PrimaryKey("PK_Products", x => x.FruitID);
                 });
 
             migrationBuilder.CreateTable(
@@ -91,6 +66,7 @@ namespace SportsStore.Migrations
                     ConcurrencyStamp = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Email = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
                     EmailConfirmed = table.Column<bool>(type: "bit", nullable: false),
+                    FruitID = table.Column<int>(type: "int", nullable: true),
                     LockoutEnabled = table.Column<bool>(type: "bit", nullable: false),
                     LockoutEnd = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: true),
                     NormalizedEmail = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
@@ -98,7 +74,6 @@ namespace SportsStore.Migrations
                     PasswordHash = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     PhoneNumber = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     PhoneNumberConfirmed = table.Column<bool>(type: "bit", nullable: false),
-                    ProductID = table.Column<int>(type: "int", nullable: true),
                     SecurityStamp = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     TwoFactorEnabled = table.Column<bool>(type: "bit", nullable: false),
                     UserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
@@ -108,37 +83,10 @@ namespace SportsStore.Migrations
                 {
                     table.PrimaryKey("PK_AspNetUsers", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_AspNetUsers_Products_ProductID",
-                        column: x => x.ProductID,
+                        name: "FK_AspNetUsers_Products_FruitID",
+                        column: x => x.FruitID,
                         principalTable: "Products",
-                        principalColumn: "ProductID",
-                        onDelete: ReferentialAction.Restrict);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "CartLine",
-                columns: table => new
-                {
-                    CartLineID = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    OrderID = table.Column<int>(type: "int", nullable: true),
-                    ProductID = table.Column<int>(type: "int", nullable: true),
-                    Quantity = table.Column<int>(type: "int", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_CartLine", x => x.CartLineID);
-                    table.ForeignKey(
-                        name: "FK_CartLine_Orders_OrderID",
-                        column: x => x.OrderID,
-                        principalTable: "Orders",
-                        principalColumn: "OrderID",
-                        onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
-                        name: "FK_CartLine_Products_ProductID",
-                        column: x => x.ProductID,
-                        principalTable: "Products",
-                        principalColumn: "ProductID",
+                        principalColumn: "FruitID",
                         onDelete: ReferentialAction.Restrict);
                 });
 
@@ -255,6 +203,11 @@ namespace SportsStore.Migrations
                 column: "RoleId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_AspNetUsers_FruitID",
+                table: "AspNetUsers",
+                column: "FruitID");
+
+            migrationBuilder.CreateIndex(
                 name: "EmailIndex",
                 table: "AspNetUsers",
                 column: "NormalizedEmail");
@@ -265,21 +218,6 @@ namespace SportsStore.Migrations
                 column: "NormalizedUserName",
                 unique: true,
                 filter: "[NormalizedUserName] IS NOT NULL");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_AspNetUsers_ProductID",
-                table: "AspNetUsers",
-                column: "ProductID");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_CartLine_OrderID",
-                table: "CartLine",
-                column: "OrderID");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_CartLine_ProductID",
-                table: "CartLine",
-                column: "ProductID");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -300,16 +238,10 @@ namespace SportsStore.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
-                name: "CartLine");
-
-            migrationBuilder.DropTable(
                 name: "AspNetRoles");
 
             migrationBuilder.DropTable(
                 name: "AspNetUsers");
-
-            migrationBuilder.DropTable(
-                name: "Orders");
 
             migrationBuilder.DropTable(
                 name: "Products");

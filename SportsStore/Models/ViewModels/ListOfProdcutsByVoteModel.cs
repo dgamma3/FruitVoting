@@ -6,11 +6,11 @@ namespace SportsStore.Models.ViewModels {
     public class ListOfProdcutsByVoteModel {
 
 
-        public List<ProductsAndVote> productAndVote;
+        public List<OrderFruitByVote> productAndVote;
 
     }
 
-    public class ProductsAndVote
+    public class OrderFruitByVote
     {
         public string Name { get; set; }
         public int NumberVoted { get; set; }

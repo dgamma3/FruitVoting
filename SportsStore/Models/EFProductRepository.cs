@@ -10,7 +10,7 @@ namespace SportsStore.Models {
             context = ctx;
         }
 
-        public IQueryable<Fruit> Products => context.Products;
+        public IQueryable<Fruit> Fruit => context.Products;
 
         public void SaveProduct(Fruit product) {
             if (product.FruitID == 0) {
