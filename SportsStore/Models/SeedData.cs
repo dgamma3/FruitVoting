@@ -9,7 +9,7 @@ namespace SportsStore.Models {
     public static class SeedData {
 
         public static void EnsurePopulated(IServiceProvider services) {
-            ApplicationDbContext context = services.GetRequiredService<ApplicationDbContext>();
+            AppIdentityDbContext context = services.GetRequiredService<AppIdentityDbContext>();
             //context.Database.Migrate();
             if (!context.Products.Any()) {
                 context.Products.AddRange(

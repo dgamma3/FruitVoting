@@ -4,9 +4,9 @@ using System.Linq;
 namespace SportsStore.Models {
 
     public class EFProductRepository : IProductRepository {
-        private ApplicationDbContext context;
+        private AppIdentityDbContext context;
 
-        public EFProductRepository(ApplicationDbContext ctx) {
+        public EFProductRepository(AppIdentityDbContext ctx) {
             context = ctx;
         }
 

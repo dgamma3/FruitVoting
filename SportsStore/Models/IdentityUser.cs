@@ -10,8 +10,8 @@ namespace SportsStore.Models
         public class ApplicationUser : IdentityUser
         {
         public string Vote { get; set; }
-        
-        }
+        public Product Product { get; set; }
+    }
 
   
 }

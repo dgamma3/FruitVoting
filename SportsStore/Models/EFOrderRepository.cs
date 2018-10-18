@@ -4,9 +4,9 @@ using System.Linq;
 namespace SportsStore.Models {
 
     public class EFOrderRepository : IOrderRepository {
-        private ApplicationDbContext context;
+        private AppIdentityDbContext context;
 
-        public EFOrderRepository(ApplicationDbContext ctx) {
+        public EFOrderRepository(AppIdentityDbContext ctx) {
             context = ctx;
         }
 

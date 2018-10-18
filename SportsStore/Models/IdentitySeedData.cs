@@ -21,7 +21,9 @@ namespace SportsStore.Models
             {
                 user1 = new ApplicationUser()
                 {
-                    UserName = adminUser1
+                    UserName = adminUser1,
+                   
+                    
                 }; 
                 await userManager.CreateAsync(user1, adminPassword1);
               
@@ -31,7 +33,8 @@ namespace SportsStore.Models
             {
                 user2 = new ApplicationUser()
                 {
-                    UserName = adminUser2
+                    UserName = adminUser2                  
+           
                 };
                 await userManager.CreateAsync(user2, adminPassword2);
 

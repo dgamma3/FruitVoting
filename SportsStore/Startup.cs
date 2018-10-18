@@ -22,9 +22,9 @@ namespace SportsStore {
         public IConfiguration Configuration { get; }
 
         public void ConfigureServices(IServiceCollection services) {
-            services.AddDbContext<ApplicationDbContext>(options =>
+            services.AddDbContext<AppIdentityDbContext>(options =>
                 options.UseSqlServer(
-                    Configuration["Data:SportStoreProducts:ConnectionString"]));
+                    Configuration["Data:SportStoreIdentity:ConnectionString"]));
 
             services.AddDbContext<AppIdentityDbContext>(options =>
                 options.UseSqlServer(
