@@ -26,11 +26,13 @@
 
   <ItemGroup>
     <Compile Remove="Components\CartSummaryViewComponent.cs" />
+    <Compile Remove="Components\NavigationMenuViewComponent.cs" />
     <Compile Remove="Controllers\ErrorController.cs" />
     <Compile Remove="Controllers\OrderController.cs" />
     <Compile Remove="Controllers\ProductController.cs" />
     <Compile Remove="Infrastructure\PageLinkTagHelper.cs" />
     <Compile Remove="Infrastructure\ProductsListViewModel.cs" />
+    <Compile Remove="Infrastructure\UrlExtensions.cs" />
     <Compile Remove="Models\Cart.cs" />
     <Compile Remove="Models\EFOrderRepository.cs" />
     <Compile Remove="Models\FakeProductRepository.cs" />
@@ -43,6 +45,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Components\" />
     <Folder Include="Migrations\" />
     <Folder Include="wwwroot\" />
   </ItemGroup>
