@@ -1,0 +1,34 @@
+﻿@model ListOfProdcutsByVoteModel
+@{
+    ViewBag.Title = "All Products";
+    Layout = "_AdminLayout";
+}
+
+<h2>Your cart</h2>
+<table class="table table-bordered table-striped">
+    <thead>
+        <tr>
+            <th>Fruit</th>
+            <th>Votes</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var fruit in Model.productAndVote)
+        {
+            <tr>
+                <td class="text-center">@fruit.Name</td>
+                <td class="text-left">@fruit.NumberVoted</td>
+     
+            </tr>
+        }
+    </tbody>
+    <tfoot>
+        <tr>
+            <td colspan="3" class="text-right">Total:</td>
+            <td class="text-right">
+                
+            </td>
+        </tr>
+    </tfoot>
+</table>
+

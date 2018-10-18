@@ -11,7 +11,7 @@ using System;
 namespace SportsStore.Migrations
 {
     [DbContext(typeof(AppIdentityDbContext))]
-    [Migration("20181018014354_init")]
+    [Migration("20181018045650_init")]
     partial class init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
