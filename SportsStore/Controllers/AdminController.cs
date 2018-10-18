@@ -56,7 +56,7 @@ namespace SportsStore.Controllers {
 
         public IActionResult Add(int ProductID)
         {
-          var newProduct =  repository.Products.First(x => x.ProductID == ProductID);
+          var newProduct =  repository.Products.First(x => x.FruitID == ProductID);
 
            var user = GetCurrentUser().Result;
             user.Product = newProduct;
@@ -70,10 +70,10 @@ namespace SportsStore.Controllers {
         }
         public ViewResult Edit(int productId) =>
             View(repository.Products
-                .FirstOrDefault(p => p.ProductID == productId));
+                .FirstOrDefault(p => p.FruitID == productId));
         
         [HttpPost]
-        public IActionResult Edit(Product product) {
+        public IActionResult Edit(Fruit product) {
             if (ModelState.IsValid) {
                 repository.SaveProduct(product);
                 TempData["message"] = $"{product.Name} has been saved";
@@ -84,11 +84,11 @@ namespace SportsStore.Controllers {
             }
         }
 
-        public ViewResult Create() => View("Edit", new Product());
+        public ViewResult Create() => View("Edit", new Fruit());
 
         [HttpPost]
         public IActionResult Delete(int productId) {
-            Product deletedProduct = repository.DeleteProduct(productId);
+            Fruit deletedProduct = repository.DeleteProduct(productId);
             if (deletedProduct != null) {
                 TempData["message"] = $"{deletedProduct.Name} was deleted";
             }

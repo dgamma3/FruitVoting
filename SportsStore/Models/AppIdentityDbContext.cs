@@ -9,6 +9,6 @@ namespace SportsStore.Models {
         public AppIdentityDbContext(DbContextOptions<AppIdentityDbContext> options)
             : base(options) { }
 
-        public DbSet<Product> Products { get; set; }
+        public DbSet<Fruit> Products { get; set; }
     }
 }

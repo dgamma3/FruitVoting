@@ -7,7 +7,7 @@ namespace SportsStore.Models.ViewModels
 
     public class AdminViewModel
     {
-        public IEnumerable<Product> products;
+        public IEnumerable<Fruit> products;
         public ApplicationUser user { get; set; }
         public string ReturnUrl { get; set; }
     }

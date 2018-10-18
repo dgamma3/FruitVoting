@@ -3,17 +3,7 @@
     ViewBag.Title = "All Products";
     Layout = "_AdminLayout";
 }
-Hello @Model.user.UserName
-@if (@Model.user.Product != null)
-{
-    <p>You previously voted for @Model.user.Product.Name</p>
-}
-else
-{
-    <p>please vote on a selection of fruit</p>
 
-
-}
 @if (Model.products.Count() == 0)
 {
 
@@ -24,23 +14,37 @@ else
     </div>
 
 }
+
+
+Hello @Model.user.UserName
+@if (@Model.user.Product != null)
+{
+    <p>You previously voted for @Model.user.Product.Name</p>
+    <p>Change your selection below:</p>
+}
 else
 {
-    <form asp-action="Add" method="post">
+    <p>Please vote on a fruit</p>
 
-   
-        <select name="ProductID">
-            @foreach (var item in Model.products)
-            {
-                <option  value="@item.ProductID">@item.Name</option>
-
-            }
-          
-        </select>
-
-            <button type="submit" class="btn btn-danger btn-sm">
-                Submit
-            </button>
-    </form>
 
 }
+
+<form asp-action="Add" method="post">
+
+
+    <select name="ProductID">
+        @foreach (var item in Model.products)
+        {
+            <option value="@item.FruitID">@item.Name</option>
+
+        }
+
+    </select>
+
+    <button type="submit" class="btn btn-danger btn-sm">
+        Submit
+    </button>
+</form>
+
+
+

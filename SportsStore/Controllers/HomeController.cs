@@ -19,12 +19,10 @@ namespace SportsStore.Controllers {
         }
 
         public ViewResult Index(string returnUrl) {
-            var fruitsVotedFor = userManager.Users.Include(p => p.Product).Select(x => x.Product).ToArray();
-  
+            var fruitsVotedFor = userManager.Users.Include(p => p.Product).Select(x => x.Product).Where(y => y != null ).ToArray();
+           
             var fruitsVotedForGrouped = fruitsVotedFor.GroupBy(x => x).ToDictionary(g => g.Key, g => g.Count()).OrderBy(v => v.Value);
-
-
-
+                       
             var fruitsVotedForByName2 = fruitsVotedForGrouped.Select(pp => new ProductsAndVote
             {
                 Name = pp.Key.Name,

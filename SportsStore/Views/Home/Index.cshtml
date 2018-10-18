@@ -1,10 +1,9 @@
 ﻿@model ListOfProdcutsByVoteModel
 @{
-    ViewBag.Title = "All Products";
+    ViewBag.Title = "Voted Fruit";
     Layout = "_AdminLayout";
 }
-
-<h2>Your cart</h2>
+<p></p>
 <table class="table table-bordered table-striped">
     <thead>
         <tr>
@@ -24,9 +23,9 @@
     </tbody>
     <tfoot>
         <tr>
-            <td colspan="3" class="text-right">Total:</td>
-            <td class="text-right">
-                
+            <td class="text-right">Total:</td>
+            <td class="text-left">
+                @Model.productAndVote.Sum(x => x.NumberVoted)
             </td>
         </tr>
     </tfoot>
