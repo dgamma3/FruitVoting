@@ -6,6 +6,40 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Views\Cart\**" />
+    <Compile Remove="Views\Order\**" />
+    <Compile Remove="Views\Product\**" />
+    <Compile Remove="Views\Shared\**" />
+    <Content Remove="Views\Cart\**" />
+    <Content Remove="Views\Order\**" />
+    <Content Remove="Views\Product\**" />
+    <Content Remove="Views\Shared\**" />
+    <EmbeddedResource Remove="Views\Cart\**" />
+    <EmbeddedResource Remove="Views\Order\**" />
+    <EmbeddedResource Remove="Views\Product\**" />
+    <EmbeddedResource Remove="Views\Shared\**" />
+    <None Remove="Views\Cart\**" />
+    <None Remove="Views\Order\**" />
+    <None Remove="Views\Product\**" />
+    <None Remove="Views\Shared\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Remove="Controllers\ErrorController.cs" />
+    <Compile Remove="Controllers\OrderController.cs" />
+    <Compile Remove="Controllers\ProductController.cs" />
+    <Compile Remove="Infrastructure\PageLinkTagHelper.cs" />
+    <Compile Remove="Infrastructure\ProductsListViewModel.cs" />
+    <Compile Remove="Models\EFOrderRepository.cs" />
+    <Compile Remove="Models\FakeProductRepository.cs" />
+    <Compile Remove="Models\Fruit.cs" />
+    <Compile Remove="Models\IOrderRepository.cs" />
+    <Compile Remove="Models\Order.cs" />
+    <Compile Remove="Models\ViewModels\CartIndexViewModel.cs" />
+    <Compile Remove="Models\ViewModels\PagingInfo.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Folder Include="Migrations\" />
     <Folder Include="wwwroot\" />
   </ItemGroup>
